@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public GameObject winGate;
     public TextMeshProUGUI winText;
     public GameObject barbarian;
+    public int collectablesLeft = 5;
+    public TextMeshProUGUI allCollectedText;
 
 
     // Update is called once per frame
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
            if (collectablesCollected == 5)
             {
                 winGate.gameObject.SetActive(true);
+                allCollectedText.gameObject.SetActive(true);
             }
         }
         
@@ -51,7 +54,7 @@ public class GameManager : MonoBehaviour
         DisplayTime(timeRemaining);
         titleScreen.gameObject.SetActive(false);
         collectablesText.gameObject.SetActive(true);
-        collectablesText.text = "Gems Collected: " + collectablesCollected;
+        collectablesText.text = "Gems Left to Collect: " + collectablesLeft;
     }
 
     public void RestartGame()
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         float scoreTime = timeRemaining;
         barbarian.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(true);
     }
 
     public void UpdateTimer()
@@ -94,7 +98,8 @@ public class GameManager : MonoBehaviour
 
     public void CollectGem()
     {
-         collectablesCollected += 1;
-         collectablesText.text = "Gems Collected: " + collectablesCollected; 
+        collectablesCollected += 1;
+        collectablesLeft -= 1;
+        collectablesText.text = "Gems Left to Collect: " + collectablesLeft; 
     }
 }
