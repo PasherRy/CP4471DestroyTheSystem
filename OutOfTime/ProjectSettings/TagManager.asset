@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - WinGate
+  - Trap
   layers:
   - Default
   - TransparentFX

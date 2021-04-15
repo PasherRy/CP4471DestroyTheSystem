@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public GameObject barbarian;
     public int collectablesLeft = 5;
     public TextMeshProUGUI allCollectedText;
+    public TextMeshProUGUI playerHealth;
+    public int healthRemaining = 100;
 
 
     // Update is called once per frame
@@ -42,6 +44,11 @@ public class GameManager : MonoBehaviour
                 winGate.gameObject.SetActive(true);
                 allCollectedText.gameObject.SetActive(true);
             }
+
+           if (healthRemaining == 0)
+            {
+                GameOver();
+            }
         }
         
     }
@@ -55,6 +62,8 @@ public class GameManager : MonoBehaviour
         titleScreen.gameObject.SetActive(false);
         collectablesText.gameObject.SetActive(true);
         collectablesText.text = "Gems Left to Collect: " + collectablesLeft;
+        playerHealth.gameObject.SetActive(true);
+        playerHealth.text = "Health: " + healthRemaining + "%";
     }
 
     public void RestartGame()
@@ -78,6 +87,12 @@ public class GameManager : MonoBehaviour
         float scoreTime = timeRemaining;
         barbarian.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(true);
+    }
+
+    public void TakeDamage()
+    {
+        healthRemaining -= 25;
+        playerHealth.text = "Health: " + healthRemaining + "%";
     }
 
     public void UpdateTimer()

@@ -42,5 +42,11 @@ public class ControlPlayer : MonoBehaviour
         {
             gameManager.WinGame();
         }
+
+        if (other.CompareTag("Trap"))
+        {
+            Destroy(other.gameObject);
+            gameManager.TakeDamage();
+        }
     }
 }
